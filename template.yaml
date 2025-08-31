@@ -24,6 +24,7 @@ Resources:
           Properties:
             Path: /shorten
             Method: POST  # POST method to create a shortened URL
+            # 此事件用于处理生成短链接的请求
 
   UrlMappingTable:
     Type: AWS::DynamoDB::Table
