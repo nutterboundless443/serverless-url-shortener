@@ -23,7 +23,7 @@ Resources:
           Type: Api
           Properties:
             Path: /shorten
-            Method: POST
+            Method: POST  # POST method to create a shortened URL
 
   UrlMappingTable:
     Type: AWS::DynamoDB::Table
@@ -35,4 +35,4 @@ Resources:
         - AttributeName: short_url
           KeyType: HASH
       BillingMode: PAY_PER_REQUEST
-      TableName: url_mapping
+      TableName: url_mapping  # Table for storing URL mappings
