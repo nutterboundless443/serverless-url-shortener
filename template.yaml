@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Serverless URL Shortener
+
+Resources:
+  UrlShortenerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.lambda_handler
+      Runtime: python3.8
+      MemorySize: 128
+      Timeout: 3
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: url_mapping
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /{short_url}
+            Method: GET
+          # 允许POST请求用于生成短链接
+        CreateShortUrl:
+          Type: Api
+          Properties:
+            Path: /shorten
+            Method: POST
+
+  UrlMappingTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: short_url
+          AttributeType: S
+      KeySchema:
+        - AttributeName: short_url
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+      TableName: url_mapping
