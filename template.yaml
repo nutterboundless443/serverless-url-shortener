@@ -18,7 +18,7 @@ Resources:
           Properties:
             Path: /{short_url}
             Method: GET
-          # 允许POST请求用于生成短链接
+          # 允许GET请求用于获取原始链接
         CreateShortUrl:
           Type: Api
           Properties:
